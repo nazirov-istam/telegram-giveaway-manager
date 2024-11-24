@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: telegram-giveaway-manager
+  datasource:
+    username: 'java'
+    password: 'root'
+    url: 'jdbc:postgresql://localhost:5432/java_db'
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  sql:
+    init:
+      mode: never
+server:
+  port: 8080
+telegram:
+  bot:
+    token: '7910143675:AAHaWoXg8bu14ot2FdzUtx82rXWOWzbGJJQ'
+    username: '@Giveaway1_bot_giveaway1_bot'
+
+   # telegram.bot.token='7063545025:AAEiuv1TDT86EIKQ1pvmI-icmEkVDDw9Utg'
+   # telegram.bot.username='@dfvfdsgvbfduivbhsdfiusd_bot'
