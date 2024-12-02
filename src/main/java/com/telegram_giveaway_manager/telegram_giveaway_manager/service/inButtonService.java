@@ -19,23 +19,14 @@ public class inButtonService {
             InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
             InlineKeyboardButton button1 = new InlineKeyboardButton();
             InlineKeyboardButton button2 = new InlineKeyboardButton();
-            InlineKeyboardButton button3 = new InlineKeyboardButton();
-
-            button1.setText(" ➕ Channel 1 ➕ ");
-            button1.setUrl(Constants.SETTING().getChannel1Url());
-
-            button2.setText(" ➕ Channel 2 ➕ ");
-            button2.setUrl(Constants.SETTING().getChannel2Url());
-
-            button3.setText(text.split("00001")[1]);
-            button3.setCallbackData(Commands.JOIN_CHANNEL);
-
+            button1.setText(" ➕ Kanal ➕ ");
+            button1.setUrl(Constants.SETTING().getChannelUrl());
+            button2.setText(text.split("00001")[1]);
+            button2.setCallbackData(Commands.JOIN_CHANNEL);
             markupInline.setKeyboard(Arrays.asList(
                     List.of(button1),
-                    List.of(button2),
-                    List.of(button3)
+                    List.of(button2)
             ));
-
             SendMessage message = new SendMessage();
             message.setChatId(chatId);
             message.setText(text.split("00001")[0]);

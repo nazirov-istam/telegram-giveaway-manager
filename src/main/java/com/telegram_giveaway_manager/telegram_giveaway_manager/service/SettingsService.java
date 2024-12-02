@@ -16,6 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SettingsService {
     private final SettingRepository repository;
+    private final SettingRepository settingRepository;
 
     public SendMessage updateId(Message message) {
         SendMessage sendMessage = new SendMessage();
@@ -47,5 +48,14 @@ public class SettingsService {
 
         }
         return sendMessage;
+    }
+
+    public Optional<Setting> get() {
+        try {
+            return settingRepository.findById(1);
+        }catch (Exception e){
+            log.error("Setting is empty!");
+            return Optional.empty();
+        }
     }
 }

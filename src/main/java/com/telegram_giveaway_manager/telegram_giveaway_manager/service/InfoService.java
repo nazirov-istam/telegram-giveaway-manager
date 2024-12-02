@@ -9,7 +9,7 @@ public class InfoService {
     public SendMessage sendInfo(long chatId) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(String.valueOf(chatId));
-        sendMessage.setText(MessageUz.entryMessage);
+        sendMessage.setText(MessageUz.info);
         return sendMessage;
     }
 }

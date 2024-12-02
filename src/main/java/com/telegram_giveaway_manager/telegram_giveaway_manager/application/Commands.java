@@ -6,6 +6,5 @@ public final class Commands {
     public static final String INFO = "/info";
     public static final String JOIN_CHANNEL = "joinChannel";
     public static final String CHANNELFIRST = "/channelFirst";
-    public static final String CHANNELLAST = "/channelLast";
     public static final String SENDINGID = "/id";
 }

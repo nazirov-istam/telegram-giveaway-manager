@@ -17,26 +17,28 @@ public class CheckService {
     @Autowired
     private TelegramBot bot;
 
+    public boolean checkChatMember(Long userId) {
+        return isSubscribed(Constants.SETTING().getChannelId(), userId);
+    }
+
+
     private boolean isSubscribed(String chatId, Long userId) {
         try {
+            System.out.println("Checking subscription for user: " + userId + " in chat: " + chatId);
             ChatMember chatMember = bot.execute(new GetChatMember(chatId, userId));
 
             if (chatMember instanceof ChatMemberAdministrator
                     || chatMember instanceof ChatMemberOwner
                     || chatMember instanceof ChatMemberRestricted
-                    || chatMember instanceof ChatMemberMember
-            ) {
+                    || chatMember instanceof ChatMemberMember) {
                 return true;
             } else if (chatMember instanceof ChatMemberLeft || chatMember instanceof ChatMemberBanned) {
                 return false;
             }
         } catch (TelegramApiException e) {
             e.printStackTrace();
+            System.err.println("Error occurred while checking chat membership for user: " + userId + " in chat: " + chatId);
         }
         return false;
-    }
-
-    public boolean checkChatMember(Long userId) {
-        return isSubscribed(Constants.SETTING().getChannel1Id(), userId) && isSubscribed(Constants.SETTING().getChannel2Id(), userId);
     }
 }

@@ -23,50 +23,32 @@ public class ChannelService {
         sendMessage.setChatId(message.getChatId());
         String request = message.getText();
         log.info("start update channel settings {}", request);
+
         if (request.split(":")[0].equals(Commands.CHANNELFIRST)) {
-            log.info("start update first channel settings {}", request);
+            log.info("start update the channel settings {}", request);
             Optional<Setting> optional = repository.findById(1);
-            if (optional.isEmpty()){
-               log.info("settings is not found by id 1");
-               sendMessage.setText("settings is not found by id 1");
-               return sendMessage;
-            }
-            Setting byId = optional.get();
-            String channel1Url = byId.getChannel1Url() != null ? byId.getChannel1Url() : "null";
-            String channel1Id = byId.getChannel1Id() != null ? byId.getChannel1Id() : "null";
-            log.info("settings id :{}, settings first channel [url:id] :{}", 1, channel1Url.concat(":").concat(channel1Id));
-            String url = request.split(":")[1];
-            String id = request.split(":")[2];
-            byId.setChannel1Url(url);
-            byId.setChannel1Id(id);
-            repository.save(byId);
-            log.info("success updated first channel settings to :{}", url.concat(":").concat(id));
-            sendMessage.setText("success updated first channel settings to :" + url.concat(":").concat(id));
-        } else if (request.split(":")[0].equals(Commands.CHANNELLAST)) {
-            log.info("start update last channel settings {}", request);
-            Optional<Setting> optional = repository.findById(1);
-            if (optional.isEmpty()){
+            if (optional.isEmpty()) {
                 log.info("settings is not found by id 1");
                 sendMessage.setText("settings is not found by id 1");
                 return sendMessage;
             }
 
             Setting byId = optional.get();
-            String channel2Url = byId.getChannel2Url() != null ? byId.getChannel2Url() : "null";
-            String channel2Id = byId.getChannel2Id() != null ? byId.getChannel2Id() : "null";
-            log.info("settings id :{}, settings last channel [url:id] :{}", 1, channel2Url.concat(":").concat(channel2Id));
+            String channel1Url = byId.getChannelUrl() != null ? byId.getChannelUrl() : "null";
+            String channel1Id = byId.getChannelId() != null ? byId.getChannelId() : "null";
+            log.info("settings id :{}, settings the channel [url:id] :{}", 1, channel1Url.concat(":").concat(channel1Id));
             String url = request.split(":")[1];
             String id = request.split(":")[2];
-            byId.setChannel2Url(url);
-            byId.setChannel2Id(id);
+            byId.setChannelUrl(url);
+            byId.setChannelId(id);
             repository.save(byId);
-            log.info("success updated last channel settings to :{}", url.concat(":").concat(id));
-            sendMessage.setText("success updated last channel settings to :" + url.concat(":").concat(id));
-
+            log.info("success updated first channel settings to :{}", url.concat(":").concat(id));
+            sendMessage.setText("success updated the channel settings to :" + url.concat(":").concat(id));
         } else {
-            log.info("............. {}", request);
-            sendMessage.setText("this is :{} key word not found" + request.split(":")[0]);
+            log.info("Invalid command received: {}", request);
+            sendMessage.setText("Invalid command: " + request.split(":")[0]);
         }
+
         return sendMessage;
     }
 }

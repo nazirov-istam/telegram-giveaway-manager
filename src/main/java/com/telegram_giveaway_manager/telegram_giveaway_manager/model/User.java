@@ -3,7 +3,10 @@ package com.telegram_giveaway_manager.telegram_giveaway_manager.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.validation.annotation.Validated;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -32,8 +35,13 @@ public class User {
     String instagramId;
     @Basic
     @Column(name = ("ticket_number"))
-    private Long ticketNumber;
+    private String ticketNumber;
     @Basic
     @Column(name = ("success"))
     private String success;
+
+    private String step;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }
