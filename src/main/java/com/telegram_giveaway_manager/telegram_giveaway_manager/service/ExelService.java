@@ -54,7 +54,7 @@ public class ExelService {
         }
 
         // Создаем директорию для сохранения файла
-        File dir = new File("src/main/resources/data/");
+        File dir = new File("target/classes/data/");
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -72,7 +72,7 @@ public class ExelService {
 
     // Метод для удаления Excel-файла
     public boolean deleteExcelFile() {
-        File file = new File("src/main/resources/users_report.xlsx");  // Указываем путь к файлу
+        File file = new File("target/classes/data/users_report.xlsx");  // Указываем путь к файлу
 
         // Проверяем, существует ли файл
         if (file.exists()) {

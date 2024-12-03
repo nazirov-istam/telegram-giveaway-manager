@@ -17,15 +17,8 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Configuration
 @RequiredArgsConstructor
 public class BotConfig {
-
     private final BotProperties botProperties;
-
     private final TelegramBot bot;
-
-    @Bean
-    public TelegramBot telegramBot(DefaultBotOptions botOptions) {
-        return new TelegramBot(botProperties, bot, botOptions);
-    }
 
     @EventListener({ContextRefreshedEvent.class})
     public void init() throws TelegramApiException {

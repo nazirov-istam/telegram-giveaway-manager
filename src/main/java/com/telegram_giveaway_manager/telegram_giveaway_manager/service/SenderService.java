@@ -4,8 +4,6 @@ import com.telegram_giveaway_manager.telegram_giveaway_manager.application.Messa
 import com.telegram_giveaway_manager.telegram_giveaway_manager.controller.TelegramBot;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -17,12 +15,11 @@ import java.lang.reflect.Field;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class SenderService {
-    @Lazy
-    @Autowired
-    private  TelegramBot telegramBot;
-    @Autowired
-    private  ExelService exelService;
+    private final TelegramBot telegramBot;
+    private final ExelService exelService;
+
     public String message(String fieldName, String defaultText) {
         return getFieldValue(fieldName, defaultText);
     }
@@ -41,7 +38,7 @@ public class SenderService {
     public void sendExcelReportToUser(Long chatId) throws IOException, InterruptedException {
         exelService.generateExcelReport();
         Thread.sleep(10000);
-        File file = new File("src/main/resources/data/" + "users_report.xlsx");
+        File file = new File("target/classes/data/" + "users_report.xlsx");
 
         if (file.exists()) {
             InputFile inputFile = new InputFile(file);
@@ -67,7 +64,6 @@ public class SenderService {
         } else {
             System.err.println("Excel file not found.");
         }
-        exelService.deleteExcelFile();
     }
 
 

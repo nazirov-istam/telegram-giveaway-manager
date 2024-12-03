@@ -59,10 +59,15 @@ public class MainService {
             } else if (userText.equals("/download")) {
                 Optional<Setting> setting = settingsService.get();
                 if (setting.isEmpty()){
+                    log.warn("'setting is null or empty");
                     return sendMessage;
                 }
                 Setting entity = setting.get();
                 senderService.sendExcelReportToUser(Long.valueOf(entity.getSendingId()));
+               // exelService.deleteExcelFile();
+                sendMessage.setChatId(Long.valueOf(entity.getSendingId()));
+                sendMessage.setText("success sending");
+                return sendMessage;
             } else if (user != null && user.getStep() != null && user.getStep().equals("SUCCESS")) {
                 sendMessage.setText(MessageUz.userAlreadyExist);
                 return sendMessage;
@@ -166,7 +171,7 @@ public class MainService {
             userData.put("phoneNumber", user.getPhone());
             userData.put("instagramId", user.getInstagramId());
             userData.put("ticketNumber", user.getTicketNumber());
-            job.saveToExcel(userData);
+          //  job.saveToExcel(userData);
             sendMessage.setText(MessageUz.successText);
         }
         userService.saveUser(user);

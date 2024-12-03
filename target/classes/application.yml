@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: telegram-giveaway-manager
+  datasource:
+    username: crm
+    password: crm
+    url: jdbc:postgresql://localhost:5432/crm_db
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      mode: never
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8080
+telegram:
+  bot:
+    token: '7968780584:AAEgXquzE7WDAdMVEMC3ZWu1bONFNCSnbl8'
+    username: '@RokhatTravelKonkursBot'
+
+    # telegram.bot.token='7063545025:AAEiuv1TDT86EIKQ1pvmI-icmEkVDDw9Utg'
+    # telegram.bot.username='@dfvfdsgvbfduivbhsdfiusd_bot'
